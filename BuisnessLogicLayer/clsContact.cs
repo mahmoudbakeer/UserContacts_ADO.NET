@@ -12,7 +12,7 @@ namespace BuisnessLogicLayer
     enum enMode { AddNew = 1, Update = 2 };
     public class clsContact
     {
-        enMode Mode { get; set; }
+        private enMode Mode { get; set; }
         public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -70,10 +70,29 @@ namespace BuisnessLogicLayer
             }
         }
 
+        private bool _UpdateContact()
+        {
+            return (clsContactsDataAccess.UpdateContact(ID, FirstName,LastName,Address,DateOfBirth,Email,Phone,ImagePath,CountryID));
+        }
+
         private bool _AddNewContact()
         {
             this.ID = clsContactsDataAccess.AddNewContact(this.FirstName, this.LastName, this.Email,this.DateOfBirth,this.Email,this.Phone,this.ImagePath,this.CountryID);
             return (this.ID != -1);
+        }
+        public static bool DeleteContact(int ContactID)
+        {
+            return (clsContactsDataAccess.DeleteContact(ContactID));
+        }
+
+        public static bool IsContactExist(int ContactID)
+        {
+            return clsContactsDataAccess.IsContactExist(ContactID);
+        }
+
+        public static DataTable GetAllContacts()
+        {
+            return clsContactsDataAccess.GetAllContacts();
         }
         public bool Save() 
         { 
@@ -86,7 +105,9 @@ namespace BuisnessLogicLayer
                         return true;
                     }
                     else return false;
-
+                case enMode.Update:
+                    if (_UpdateContact()) return true;
+                    else return false;
             }
             return false;
         }
