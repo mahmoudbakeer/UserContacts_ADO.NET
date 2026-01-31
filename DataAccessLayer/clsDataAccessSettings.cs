@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer
 {
-    internal class DataAccessSettings
+    internal class clsDataAccessSettings
     {
         public static string ConnectionsString = "Server=.;DataBase=ContactsDB;Trusted_Connection=True";
     }
