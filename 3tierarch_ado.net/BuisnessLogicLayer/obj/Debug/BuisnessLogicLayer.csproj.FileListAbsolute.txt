@@ -1,0 +1,9 @@
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\bin\Debug\BuisnessLogicLayer.dll
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\bin\Debug\BuisnessLogicLayer.pdb
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\obj\Debug\BuisnessLogicLayer.csproj.AssemblyReference.cache
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\obj\Debug\BuisnessLogicLayer.csproj.CoreCompileInputs.cache
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\obj\Debug\Buisness.081FFF6C.Up2Date
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\obj\Debug\BuisnessLogicLayer.dll
+C:\Users\mahmo\3TierArch_ADO.NET\BuisnessLogicLayer\obj\Debug\BuisnessLogicLayer.pdb
