@@ -29,9 +29,7 @@ namespace _3TierArch_ADO.NET
                 Console.WriteLine("There is no such User...");
             }
         }
-        public static bool InsertNewUser(clsContact Contact)git init
-git branch -M main
-git remote add origin https://github.com/USERNAME/REPO_NAME.git
+        public static bool InsertNewUser(clsContact Contact)
 
         {
             return(Contact.Save());
