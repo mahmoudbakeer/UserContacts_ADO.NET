@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuisnessLogicLayer", "Buisn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{EF672A70-46E0-45DC-B813-E7C80DCCFDB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFPresentationLayer", "..\WFPresentationLayer\WFPresentationLayer.csproj", "{73E446FA-53B6-4174-B13E-9484B8C6B012}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WFPresentationLayer", "WFPresentationLayer\WFPresentationLayer.csproj", "{73E446FA-53B6-4174-B13E-9484B8C6B012}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
