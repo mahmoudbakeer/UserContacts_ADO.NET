@@ -96,16 +96,15 @@ All features are tested through the console application.
 
 ## Project Structure
 
-UsersContacts_ADO.NET
-│
-├── DataAccessLayer
-│   └── Handles SQL queries and database operations
-│
-├── BusinessLogicLayer
-│   └── Contains domain entities and business rules
-│
-└── PresentationLayer
-    └── Console-based test application (Main method)
+- **UsersContacts_ADO.NET**
+  - **DataAccessLayer**  
+    Handles SQL queries and database operations
+
+  - **BusinessLogicLayer**  
+    Contains domain entities and business rules
+
+  - **PresentationLayer**  
+    Console-based test application (Main method)
 
 ---
 
