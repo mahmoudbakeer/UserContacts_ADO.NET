@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace BuisnessLogicLayer
             this.Mode = enMode.AddNew;
         }
 
-        public clsCountry Find(int CountryID)
+        public static clsCountry Find(int CountryID)
         {
             string CountryName = string.Empty;
             if(clsCountriesDataAccess.GetCountryByID(CountryID,ref CountryName))
@@ -39,7 +40,7 @@ namespace BuisnessLogicLayer
                 return new clsCountry();
             }
         }
-        public clsCountry Find(string CountryName)
+        public static clsCountry Find(string CountryName)
         {
             int CountryID = -1;
             if (clsCountriesDataAccess.GetCountryByCountryName(ref CountryID, CountryName))
@@ -52,11 +53,32 @@ namespace BuisnessLogicLayer
             }
         }
 
+        public static bool IsCountryExist(int CountryID)
+        {
+            return clsCountriesDataAccess.IsCountryExist(CountryID);
+        }
+        public static bool IsCountryExist(string CountryName)
+        {
+            return clsCountriesDataAccess.IsCountryExist(CountryName);
+        }
         private bool _AddNewCountry()
         {
             this.CountryID = clsCountriesDataAccess.AddNewCountry(this.CountryName);
-            return (CountryID != -1);
+            return (this.CountryID != -1);
         }
+        private bool _UpdateCountry()
+        {
+            return clsCountriesDataAccess.UpdateCountry(this.CountryID,this.CountryName);
+        }
+        public static bool DeleteCountry(int CountryID)
+        {
+            return clsCountriesDataAccess.DeleteCountry(CountryID);
+        }
+
+        public static DataTable GetAllCountries()
+        {
+            return clsCountriesDataAccess.GetAllCountries();
+        } 
         public bool Save()
         {
             switch (this.Mode)
@@ -71,6 +93,9 @@ namespace BuisnessLogicLayer
                     {
                         return false;
                     }
+                case enMode.Update:
+                    if (this._UpdateCountry()) return true;
+                    else return false;
                    
             }
             return false;

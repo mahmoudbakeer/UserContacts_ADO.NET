@@ -79,53 +79,216 @@ namespace _3TierArch_ADO.NET
                 Console.WriteLine($"ContactID : {row["ContactID"].ToString()}  ,  Name {row["FirstName"] + " " + row["LastName"]}");
             }
         }
+
+        /*
+         
+         Countries Functionalities
+         
+         */
+
+        public static void GetCountryByID(int CountryID)
+        {
+            clsCountry Country = clsCountry.Find(CountryID);    
+            if (Country != null)
+            {
+                Console.WriteLine($"CountryID : {Country.CountryID}");
+                Console.WriteLine($"CountryName : {Country.CountryName}");
+            }
+            else
+            {
+                Console.WriteLine("There is no such Country...");
+            }
+        }
+        public static void GetCountryByName(string CountryName)
+        {
+            clsCountry Country = clsCountry.Find(CountryName);
+            if (Country != null)
+            {
+                Console.WriteLine($"CountryID : {Country.CountryID}");
+                Console.WriteLine($"CountryName : {Country.CountryName}");
+            }
+            else
+            {
+                Console.WriteLine("There is no such Country...");
+            }
+        }
+
+        public static void InsertNewCountry(string CountryName)
+        {
+            clsCountry country  = new clsCountry();
+            country.CountryName = CountryName;
+            if (country.Save())
+            {
+                Console.WriteLine($"The Country Has been Added Successfully ..");
+                Console.WriteLine($"The New Added CountryID is : {country.CountryID}");
+            }
+            else
+            {
+                Console.WriteLine("Somthing Went Wrong ...");
+            }
+        }
+
+        public static void DeleteCountry(int CountryID) 
+        {
+            if (clsCountry.DeleteCountry(CountryID))
+            {
+                Console.WriteLine("Country Has Been Deleted Successfully ..");
+            }
+            else
+            {
+                Console.WriteLine("Somthing Went Wrong ..");
+            }
+        }
+        public static void UpdateCountry(clsCountry country)
+        {
+            if (country.Save())
+            {
+                Console.WriteLine("Country Updated Successfully ...");
+                Console.WriteLine($"CountryID : {country.CountryID}");
+                Console.WriteLine($"CountryName : {country.CountryName}");
+            }
+            else
+            {
+                Console.WriteLine("Somthing Went Wrong ..");
+            }
+        }
+
+        public static void IsCountryExist(int CountryID) 
+        {
+            if (clsCountry.IsCountryExist(CountryID))
+            {
+                Console.WriteLine("The Country is Exist ...");
+            }
+            else
+            {
+                Console.WriteLine("The Country is Not Exist ...");
+
+            }
+        }
+        public static void IsCountryExist(string CountryName)
+        {
+            if (clsCountry.IsCountryExist(CountryName))
+            {
+                Console.WriteLine("The Country is Exist ...");
+            }
+            else
+            {
+                Console.WriteLine("The Country is Not Exist ...");
+            }
+        }
+
+        public static void ShowAllTheCountries()
+        {
+            DataTable dt = clsCountry.GetAllCountries();
+
+            if(dt.Rows.Count > 0)
+            {
+                Console.WriteLine("The Available Countries in The DataBase :");
+                foreach(DataRow dr in dt.Rows)
+                {
+                    Console.WriteLine($"CountryID is {dr["CountryID"]}");
+                    Console.WriteLine($"CountryName is {dr["CountryName"]}");
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Available Countries in the DataBase ...");
+            }
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine("-------------------");
+            //Console.WriteLine("===== CONTACT TEST CONSOLE =====");
 
-            //GetUserContactByID(2);
+            // -------- INSERT CONTACT --------
+            Console.WriteLine("\n--- Insert New Contact ---");
 
-            Console.WriteLine("-------------------");
+            clsContact contact = new clsContact();
 
-            //clsContact contact = new clsContact();
-            //contact.FirstName = "SOSO";
-            //contact.LastName = "Sadik";
-            //contact.Email = "Kifak@gmail.com";
-            //contact.Phone = "213442412";
-            //contact.DateOfBirth = new DateTime(1999,11,27);
-            //contact.Address = "REEF/Syria/MiddleEast";
-            //contact.CountryID = 2;
+            Console.Write("First Name: ");
+            contact.FirstName = Console.ReadLine();
 
-            //if (InsertNewUser(contact))
-            //{
-            //    Console.WriteLine($"The User Added Successfully NewID is {contact.ID}");
-            //}
-            //else { Console.WriteLine("Error Occured ..."); }
+            Console.Write("Last Name: ");
+            contact.LastName = Console.ReadLine();
 
-            //Console.WriteLine("-------------------");
+            Console.Write("Email: ");
+            contact.Email = Console.ReadLine();
 
-            //GetUserContactByID(6);
+            Console.Write("Phone: ");
+            contact.Phone = Console.ReadLine();
 
-            //Console.WriteLine("-------------------");
+            Console.Write("Address: ");
+            contact.Address = Console.ReadLine();
 
-            //UpdateContact(6);
+            Console.Write("Country ID: ");
+            contact.CountryID = int.Parse(Console.ReadLine());
 
+            Console.Write("Date of Birth (yyyy-mm-dd): ");
+            contact.DateOfBirth = DateTime.Parse(Console.ReadLine());
 
-            //Console.WriteLine("-------------------");
+            if (InsertNewUser(contact))
+                Console.WriteLine($"✔ Contact added successfully. New ID = {contact.ID}");
+            else
+                Console.WriteLine("✖ Failed to add contact.");
 
-            //GetUserContactByID(6);
+            // -------- GET CONTACT --------
+            Console.WriteLine("\n--- Get Contact By ID ---");
+            Console.Write("Enter Contact ID: ");
+            int contactID = int.Parse(Console.ReadLine());
+            GetUserContactByID(contactID);
 
-            //Console.WriteLine("-------------------");
+            // -------- UPDATE CONTACT --------
+            Console.WriteLine("\n--- Update Contact ---");
+            Console.Write("Enter Contact ID to update: ");
+            int updateID = int.Parse(Console.ReadLine());
+            UpdateContact(updateID);
 
+            // -------- CHECK EXISTENCE --------
+            Console.WriteLine("\n--- Check Contact Existence ---");
+            Console.Write("Enter Contact ID: ");
+            int existID = int.Parse(Console.ReadLine());
+            Console.WriteLine(
+                IsContactExist(existID)
+                ? "✔ Contact exists."
+                : "✖ Contact does not exist."
+            );
 
-            //DeleteUserContact(12);
-
-
-            Console.WriteLine("-------------------");
+            // -------- SHOW ALL CONTACTS --------
+            Console.WriteLine("\n--- All Contacts ---");
             ShowAllContacts();
-            Console.WriteLine("-------------------");
 
+            // -------- DELETE CONTACT --------
+            Console.WriteLine("\n--- Delete Contact ---");
+            Console.Write("Enter Contact ID to delete: ");
+            int deleteID = int.Parse(Console.ReadLine());
+            DeleteUserContact(deleteID);
+
+            --------COUNTRY TESTS--------
+            Console.WriteLine("\n===== COUNTRY TESTS =====");
+
+            // Insert country
+            Console.Write("\nEnter new country name: ");
+            string countryName = Console.ReadLine();
+            InsertNewCountry(countryName);
+
+            // Get country by name
+            Console.Write("\nEnter country name to search: ");
+            GetCountryByName(Console.ReadLine());
+
+            // Get country by ID
+            Console.Write("\nEnter country ID to search: ");
+            GetCountryByID(int.Parse(Console.ReadLine()));
+
+            // Check country existence
+            Console.Write("\nCheck country by ID: ");
+            IsCountryExist(int.Parse(Console.ReadLine()));
+
+            Console.Write("\nCheck country by name: ");
+            IsCountryExist(Console.ReadLine());
+
+            Console.WriteLine("\n===== TESTING FINISHED =====");
             Console.ReadKey();
         }
+
     }
 }
