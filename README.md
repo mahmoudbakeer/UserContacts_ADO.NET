@@ -99,13 +99,13 @@ All features are tested through the console application.
 UsersContacts_ADO.NET
 │
 ├── DataAccessLayer
-│   └── Handles SQL queries and database operations
+│ └── Handles SQL queries and database operations
 │
 ├── BusinessLogicLayer
-│   └── Contains domain entities and business rules
+│ └── Contains domain entities and business rules
 │
 └── PresentationLayer
-    └── Console-based test application (Main method)
+└── Console-based test application (Main method)
 
 ---
 
