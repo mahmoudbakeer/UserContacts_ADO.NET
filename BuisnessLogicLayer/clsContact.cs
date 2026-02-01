@@ -21,6 +21,8 @@ namespace BuisnessLogicLayer
         public string Email { get; set; }
         public string Phone { get; set; }
         public string ImagePath { get; set; }
+        public string PhoneCode { get; set; }
+        public string Code { get; set; }
         public int CountryID { get; set; }
 
         private clsContact(int ID, string FirstName, string LastName, string Email, string Phone, string Address, DateTime DateOfBirth, int CountryID, string ImagePath)
@@ -56,11 +58,11 @@ namespace BuisnessLogicLayer
         }
         public static clsContact Find(int id)
         {
-            string FirstName = "", LastName = "", Email = "", Phone = "", ImagePath = ""
+            string FirstName = "", LastName = "", Email = "", Phone = "", ImagePath = "" , Code = "" , PhoneCode = ""
              , Adress = "";
             int CountryID = 0;
             DateTime DateOfBirth = DateTime.MinValue;
-            if (clsContactsDataAccess.GetContactInfoByID(id, ref FirstName, ref LastName, ref Adress, ref DateOfBirth, ref Email, ref Phone, ref ImagePath, ref CountryID))
+            if (clsContactsDataAccess.GetContactInfoByID(id, ref FirstName, ref LastName, ref Adress, ref DateOfBirth, ref Email, ref Phone, ref ImagePath,ref Code,ref PhoneCode , ref CountryID))
             {
                 return new clsContact(id, FirstName, LastName, Email, Phone, Adress, DateOfBirth, CountryID, ImagePath);
             }
@@ -72,12 +74,12 @@ namespace BuisnessLogicLayer
 
         private bool _UpdateContact()
         {
-            return (clsContactsDataAccess.UpdateContact(ID, FirstName,LastName,Address,DateOfBirth,Email,Phone,ImagePath,CountryID));
+            return (clsContactsDataAccess.UpdateContact(ID, FirstName,LastName,Address,DateOfBirth,Email,Phone,ImagePath,Code,PhoneCode,CountryID));
         }
 
         private bool _AddNewContact()
         {
-            this.ID = clsContactsDataAccess.AddNewContact(this.FirstName, this.LastName, this.Email,this.DateOfBirth,this.Email,this.Phone,this.ImagePath,this.CountryID);
+            this.ID = clsContactsDataAccess.AddNewContact(this.FirstName, this.LastName, this.Email,this.DateOfBirth,this.Email,this.Phone,this.ImagePath,this.Code,this.PhoneCode,this.CountryID);
             return (this.ID != -1);
         }
         public static bool DeleteContact(int ContactID)

@@ -143,6 +143,7 @@ namespace DataAccessLayer
                 string query = "SELECT * FROM Countries;";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    connection.Open();
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
                         if (reader.HasRows)

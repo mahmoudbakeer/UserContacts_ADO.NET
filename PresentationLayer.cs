@@ -23,6 +23,8 @@ namespace _3TierArch_ADO.NET
                 Console.WriteLine($"Adress : {Contact.Address}");
                 Console.WriteLine($"DateOfBirth : {Contact.DateOfBirth}");
                 Console.WriteLine($"ImagePath : {Contact.ImagePath}");
+                Console.WriteLine($"Code : {Contact.Code}");
+                Console.WriteLine($"PhoneCode : {Contact.PhoneCode}");
                 Console.WriteLine($"CountryID : {Contact.CountryID}");
             }
             else
@@ -48,16 +50,37 @@ namespace _3TierArch_ADO.NET
         public static void UpdateContact(int ID)
         {
             clsContact contact = clsContact.Find(ID);
-
+            Console.WriteLine("Before Update :");
+            GetCountryByID(ID);
             if (contact != null)
             {
-                contact.FirstName = "SOSO";
-                contact.LastName = "Sadik";
-                contact.Email = "Kifak@gmail.com";
-                contact.Phone = "213442412";
-                contact.DateOfBirth = new DateTime(1999, 11, 27);
-                contact.Address = "REEF/Syria/MiddleEast";
-                contact.CountryID = 2;
+                Console.WriteLine("Enter the required The New Data : ");
+                Console.Write("First Name: ");
+                contact.FirstName = Console.ReadLine();
+
+                Console.Write("Last Name: ");
+                contact.LastName = Console.ReadLine();
+
+                Console.Write("Email: ");
+                contact.Email = Console.ReadLine();
+
+                Console.Write("Phone: ");
+                contact.Phone = Console.ReadLine();
+
+                Console.Write("Address: ");
+                contact.Address = Console.ReadLine();
+
+                Console.Write("Country ID: ");
+                contact.CountryID = int.Parse(Console.ReadLine());
+
+                Console.Write("Code : ");
+                contact.Code = Console.ReadLine();
+
+                Console.Write("PhoneCode : ");
+                contact.PhoneCode = Console.ReadLine();
+
+                Console.Write("Date of Birth (yyyy-mm-dd): ");
+                contact.DateOfBirth = DateTime.Parse(Console.ReadLine());
 
                 if (contact.Save())
                     Console.WriteLine("The Contact Updated Successfully...");
@@ -223,6 +246,12 @@ namespace _3TierArch_ADO.NET
             Console.Write("Country ID: ");
             contact.CountryID = int.Parse(Console.ReadLine());
 
+            Console.Write("Code : ");
+            contact.Code = Console.ReadLine();
+
+            Console.Write("PhoneCode : ");
+            contact.PhoneCode = Console.ReadLine();
+
             Console.Write("Date of Birth (yyyy-mm-dd): ");
             contact.DateOfBirth = DateTime.Parse(Console.ReadLine());
 
@@ -263,7 +292,7 @@ namespace _3TierArch_ADO.NET
             int deleteID = int.Parse(Console.ReadLine());
             DeleteUserContact(deleteID);
 
-            --------COUNTRY TESTS--------
+            //--------COUNTRY TESTS--------
             Console.WriteLine("\n===== COUNTRY TESTS =====");
 
             // Insert country

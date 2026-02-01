@@ -20,6 +20,8 @@ namespace DataAccessLayer
         ref string Email,
         ref string Phone,
         ref string ImagePath,
+        ref string Code,
+        ref string PhoneCode,
         ref int CountryID)
         {
             bool IsFound = false;
@@ -29,7 +31,7 @@ namespace DataAccessLayer
             {
                 string query = @"SELECT 
                             FirstName, LastName, Address, DateOfBirth,
-                            Email, Phone, ImagePath, CountryID
+                            Email, Phone, ImagePath, CountryID , PhoneCode, Code
                          FROM Contacts
                          WHERE ContactID = @ID";
 
@@ -54,6 +56,12 @@ namespace DataAccessLayer
                             ImagePath = reader["ImagePath"] == DBNull.Value
                                         ? ""
                                         : reader["ImagePath"].ToString();
+                            PhoneCode = reader["PhoneCode"] == DBNull.Value
+                                        ? ""
+                                        : reader["PhoneCode"].ToString();
+                            Code = reader["Code"] == DBNull.Value
+                                        ? ""
+                                        : reader["Code"].ToString();
                         }
                     }
                 }
@@ -70,13 +78,15 @@ namespace DataAccessLayer
          string Email,
          string Phone,
          string ImagePath,
+         string Code,
+         string PhoneCode,
          int CountryID)
         {
             int NewID = -1;
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionsString))
             {
-                string query = "INSERT INTO Contacts (FirstName,LastName,Email,Phone,Address,DateOfBirth,CountryID,ImagePath) " +
-                    "VALUES (@FirstName,@LastName,@Email,@Phone,@Address,@DateOfBirth,@CountryID,@ImagePath); " +
+                string query = "INSERT INTO Contacts (FirstName,LastName,Email,Phone,Address,DateOfBirth,CountryID,ImagePath,Code,PhoneCode) " +
+                    "VALUES (@FirstName,@LastName,@Email,@Phone,@Address,@DateOfBirth,@CountryID,@ImagePath,@Code,@PhoneCode); " +
                     "SELECT SCOPE_IDENTITY();";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
@@ -87,6 +97,8 @@ namespace DataAccessLayer
                     cmd.Parameters.AddWithValue("@Address", Address);
                     cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
                     cmd.Parameters.AddWithValue("@ImagePath", (ImagePath == "") ? (object)System.DBNull.Value : ImagePath);
+                    cmd.Parameters.AddWithValue("@PhoneCode", (PhoneCode == "") ? (object)System.DBNull.Value : PhoneCode);
+                    cmd.Parameters.AddWithValue("@Code", (Code == "") ? (object)System.DBNull.Value : Code);
                     cmd.Parameters.AddWithValue("@CountryID", CountryID);
 
                     connection.Open();
@@ -110,12 +122,14 @@ namespace DataAccessLayer
              string Email,
              string Phone,
              string ImagePath,
+             string Code,
+             string PhoneCode,
              int CountryID)
         {
             int RowsAffected = 0;
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionsString)) 
             {
-                string query = "UPDATE Contacts SET FirstName = @FirstName,LastName = @LastName,Email = @Email,Phone = @Phone,Address = @Address,DateOfBirth = @DateOfBirth,CountryID = @CountryID , ImagePath = @ImagePath" +
+                string query = "UPDATE Contacts SET FirstName = @FirstName,LastName = @LastName,Email = @Email,Phone = @Phone,Address = @Address,DateOfBirth = @DateOfBirth,CountryID = @CountryID , ImagePath = @ImagePath,PhoneCode = @PhoneCode , Code = @Code" +
                     " WHERE ContactID = @ID";
                 using(SqlCommand cmd = new SqlCommand(query,connection))
                 
@@ -129,6 +143,8 @@ namespace DataAccessLayer
                     cmd.Parameters.AddWithValue("@Address", Address);
                     cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
                     cmd.Parameters.AddWithValue("@ImagePath", (ImagePath == "") ? (object)System.DBNull.Value : ImagePath);
+                    cmd.Parameters.AddWithValue("@PhoneCode", (PhoneCode == "") ? (object)System.DBNull.Value : PhoneCode);
+                    cmd.Parameters.AddWithValue("@Code", (Code == "") ? (object)System.DBNull.Value : Code);
                     cmd.Parameters.AddWithValue("@CountryID", CountryID);
                     connection.Open();
                     RowsAffected = cmd.ExecuteNonQuery();
